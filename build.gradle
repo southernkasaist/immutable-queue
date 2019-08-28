@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.southernkasaist'
+version '0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.assertj:assertj-core:3.13.2'
+    // Junit 5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${project.property('junit.version')}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${project.property('junit.version')}"
+}
+
+test {
+    useJUnitPlatform()
+}

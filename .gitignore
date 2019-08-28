@@ -1,0 +1,8 @@
+# Build directories
+build
+
+# Gradle runtime
+.gradle
+
+# IDE
+.idea
