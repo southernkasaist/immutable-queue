@@ -2,8 +2,22 @@ package com.github.southernkasaist.util;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Implementation of immutable queue based on {@link LinkedImmutableStack}.
+ *
+ * @param <T> The underlying element.
+ */
 final class StackImmutableQueue<T> implements Queue<T> {
+    /**
+     * The dequeue stack stores outgoing elements in FIFO order.
+     * This stack should not be empty when the whole queue is not empty, which means
+     * we must always reverse "in" stack to become "out" stack when "out" stack is empty.
+     */
     private final Stack<T> out;
+
+    /**
+     * The enqueue stack stores incoming elements in FILO order.
+     */
     private final Stack<T> in;
 
     StackImmutableQueue() {
@@ -15,6 +29,16 @@ final class StackImmutableQueue<T> implements Queue<T> {
         this.in = in;
     }
 
+    /**
+     * Enqueue element.
+     * As we have to make sure the "out" stack be non-empty, when "out" stack is empty,
+     * we need to reverse the "in" stack to be "out" stack with the new element.
+     * Time complexity: O(1) in average.
+     *
+     * @param t New element, non-null.
+     *
+     * @return The new immutable queue.
+     */
     @Override
     public Queue<T> enQueue(T t) {
         if (t == null) {
@@ -28,6 +52,14 @@ final class StackImmutableQueue<T> implements Queue<T> {
         }
     }
 
+    /**
+     * Dequeue element.
+     * As we have to make sure the "out" stack be non-empty, when "out" stack is empty after popping
+     * top element, we need to reverse the "in" stack to be "out" stack and pop the top element.
+     * Time complexity: O(1) in average.
+     *
+     * @return The new immutable queue.
+     */
     @Override
     public Queue<T> deQueue() {
         if (isEmpty()) {

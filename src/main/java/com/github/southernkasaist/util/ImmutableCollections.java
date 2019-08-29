@@ -1,5 +1,8 @@
 package com.github.southernkasaist.util;
 
+/**
+ * The static factory of immutable collections.
+ */
 public final class ImmutableCollections {
     private ImmutableCollections() {}
 
